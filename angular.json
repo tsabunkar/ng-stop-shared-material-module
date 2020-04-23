@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "stop-shared-material-module": {
@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "stop-shared-material-module"
+    }
+  },
+  "defaultProject": "stop-shared-material-module",
+  "cli": {
+    "analytics": "6051a07c-8aac-43da-b27b-3f4af1f0f079"
+  }
 }
