@@ -1,27 +1,42 @@
-# StopSharedMaterialModule
+Reference:
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
+https://indepth.dev/stop-using-shared-material-module/
+https://www.npmjs.com/package/webpack-bundle-analyzer
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Steps
 
-## Code scaffolding
+- install npm i -D webpack-bundle-analyzer
+- "analyze": "ng build --prod --stats-json && webpack-bundle-analyzer ./dist/<proj_name>/stats-es2015.json"
+- ng add @angular/material
+- ng g m employee --routing --module app
+- ng g c employee --export true
+- ng g m department --routing --module app
+- ng g c department --export true
+- AGAIN run : npm run analyze
+- Add material code to department and employee
+- ng g m shared/material --flat true
+- ng g m shared/shared --flat true
+- export material module and import into shared module
+- export materialmdoule in exports[] inside sharedmodule
+- import SharedModule in deparment and employee modules
+- AGAIN run : npm run analyze
+- Size got increased from 423kb --> 641kb [check images in src/assets/first-size.png & second-size.png]
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+# lazy loading
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- remove EmployeeModule and DepartmentModule from app.module.ts
+- lazy loading those module in app-routing.module.ts
+- add roters in app template
+- size got increase to 707kb [ third-size.png]
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Remove the Shared Material module and import only the modules which are needed to Feature Module
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- Remove SharedModule in all the feature module EmployeeModule and DepartmentModule
+- Add directly the material modules used by these feature module
+- size got decrease to 673kb [ fourth-size.png]
